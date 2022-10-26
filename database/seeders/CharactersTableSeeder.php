@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+//namespace Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,22 +16,38 @@ class CharactersTableSeeder extends Seeder
         }
         return $randomString;
     }
-    public function generateRandomrank(){
-        $ranks=[
-            'N',
-            'R',
-            'SR',
-            'SSR',
-            'UR'
-        ];return $ranks[rand(0, count($ranks)-1)];
+    public function generateRandomrank($length = 1) 
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) 
+        {
+            $randomString .= $characters[rand(0, $charactersLength - 1)].'級';
+        }
+        return $randomString;
+    }
+    public function generateRandomrarity(){
+        $rarity=[
+            'N',#普通
+            'R',#稀有
+            'SR',#超稀有
+            'SSR',#超激稀有
+            'UR'#傳奇稀有
+        ];
+        return $rarity[rand(0, count($rarity)-1)];
     }
     public function generateRandomtype(){
         $types=[
-            'DD',
-            'BB',
-            'CV',
-            'CVL',
-            'CL'
+            'DD',#驅逐
+            'BB',#戰列
+            'CV',#空母
+            'CVL',#輕空母
+            'CL',#輕巡
+            'CA',#重巡
+            'SS',#潛艦
+            'BC',#戰巡
+            'SSV',#潛母
         ];
         return $types[rand(0, count($types)-1)];
     }
@@ -42,8 +58,22 @@ class CharactersTableSeeder extends Seeder
         ];
         return $gets[rand(0, count($gets)-1)];
     }
+
+    public function generateRandomcid()
+    {
+        $cid=rand(1,7);
+        return $cid;
+    }
+    public function generateRandombuild_at()
+    {
+        $build_at = rand(0, 9) . ":" . rand(0, 59) . ":" . rand(0, 59); 
+        return $build_at;
+    }
+    
+
     /**
      * Run the database seeds.
+     *
      *
      * @return void
      */
@@ -52,13 +82,13 @@ class CharactersTableSeeder extends Seeder
         for($i=0;$i<10;$i++){
             DB::table('characters')->insert([
                 'name' =>$this->generateRandomString(),
-                'cid' =>1,
-                'rank' =>$this->generateRandomString(),
+                'cid' =>$this->generateRandomcid(),
+                'rank' =>$this->generateRandomrank(),
                 'type' =>$this->generateRandomtype(),
                 'get' =>$this->generateRandomget(),
-                'rarity' =>$this->generateRandomrank(),
-                'build_at' =>"06:30:00",
-                'year' =>rand(1,1000),
+                'rarity' =>$this->generateRandomrarity(),
+                'build_at' =>$this->generateRandombuild_at(),
+                'year' =>rand(1,500),
                 'displacement' =>rand(10000,50000),
             ]);
         }
