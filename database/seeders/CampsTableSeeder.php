@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use Database\Seeders\CharactersTableSeeder;
+
 
 class CampsTableSeeder extends Seeder
 {
@@ -75,7 +75,7 @@ class CampsTableSeeder extends Seeder
         {
             DB::table('camps')->insert
             ([
-                //cid' =>$cid,
+                //cid =>$cid
                 'name' =>$this->generateRandomname(),
                 'country' =>$this->generateRandomcountry(),
                 'r_or_b' =>$this->generateRandomr_or_b()

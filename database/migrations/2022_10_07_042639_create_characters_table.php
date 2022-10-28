@@ -13,10 +13,12 @@ class CreateCharactersTable extends Migration
      */
     public function up()
     {
-        Schema::create('characters', function (Blueprint $table) {
+        Schema::create('characters', function (Blueprint $table) 
+        {
             $table->id()->unsigned()->comment("編號");
             $table->string('name')->comment("艦船名字");
-            $table->integer('cid')->unsigned()->comment("陣營編號(外部鍵)");
+            $table->foreignId('cid')->comment("陣營編號(外部鍵)");
+            $table->foreign('cid')->references('id')->on('camps')->onDelete("cascade");
             $table->string('rank',191)->comment("艦船級別");
             $table->string('type',191)->comment("艦船類型(7種)");
             $table->string('get',191)->comment("取得方式");
