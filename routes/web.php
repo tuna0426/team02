@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('characters.index');
 });
+Route::get('characters', [CharactersController::class, 'index'])->name('characters.index');

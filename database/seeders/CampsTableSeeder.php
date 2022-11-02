@@ -12,7 +12,8 @@ class CampsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function generateRandomr_or_b(){
+    public function generateRandomr_or_b()
+    {
         $r_or_b=
         [
             '赤色中軸',
@@ -20,26 +21,32 @@ class CampsTableSeeder extends Seeder
         ];
         return $r_or_b[rand(0, count($r_or_b)-1)];
     }
-    public function generateRandomcountry($length = 8) {
+   /* public function generateRandomcountry($length = 8) 
+   {
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; $i++)
+        {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
     }
-    public function generateRandomname($length = 4) {
+    
+    public function generateRandomname($length = 4) 
+    {
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; $i++) 
+        {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
     }
-
-    /*public function generateRandomcountry(){
+*/
+    public function generateRandomcountry()
+    {
         $country=
         [
             '美國',
@@ -53,7 +60,8 @@ class CampsTableSeeder extends Seeder
         ];
         return $country[rand(0, count($country)-1)];
     }
-    public function generateRandomname(){
+    public function generateRandomname()
+    {
         $name=
         [
             '白鷹',
@@ -63,19 +71,17 @@ class CampsTableSeeder extends Seeder
             '東煌',
             '北方聯合',
             '撒丁帝國',
-            '自由鳶尾',
-            '維希教廷'
+            '鳶尾教廷'
         ];
-        return $name[rand(0, count($name)-1)];
+        return $name[rand(0,count($name)-1)];
     }
-    */
+    
     public function run()
     {
-        for($i=0;$i<7;$i++)
+        for($i=0;$i<8;$i++)
         {
             DB::table('camps')->insert
             ([
-                //cid =>$cid
                 'name' =>$this->generateRandomname(),
                 'country' =>$this->generateRandomcountry(),
                 'r_or_b' =>$this->generateRandomr_or_b()
