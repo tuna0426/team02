@@ -22,32 +22,36 @@
     </head>
     <body class="antialiased">
         <h1>顯示所有艦船的視圖(view)</h1>
-        <table>
+    <table>
         <tr>
             <th>編號</th>
             <th>艦船名字</th>
-            <th>陣營編號(外部鍵)</th>
+            <th>陣營編號</th><!--key--> 
             <th>艦船級別</th>
-            <th>艦船類型(7種)</th>
+            <th>艦船類型</th>
             <th>取得方式</th>
             <th>稀有度</th>
             <th>建造所需時間</th>
             <th>年資</th>
             <th>排水量</th>
+            <th>操作1</th>
+            <th>操作2</th>
         </tr>
         @foreach($characters as $character)
             <tr>
-                <td>{{ $character->id }}</td>
-                <td>{{ $character->name }}</td>
-                <td>{{ $character->cid }}</td>
-                <td>{{ $character->rank }}</td>
-                <td>{{ $character->type }}</td>
-                <td>{{ $character->get }}</td>
-                <td>{{ $character->rarity }}</td>
-                <td>{{ $character->build_at }}</td>
-                <td>{{ $character->year }}</td>
-                <td>{{ $character->displacement }}</td>
-            </tr>
+                <td>{{ $character->id }}&nbsp;&nbsp;</td>
+                <td>{{ $character->name }}&nbsp;&nbsp;</td>
+                <td>{{ $character->cid }}&nbsp;&nbsp;</td>
+                <td>{{ $character->rank }}&nbsp;&nbsp;</td>
+                <td>{{ $character->type }}&nbsp;&nbsp;</td>
+                <td>{{ $character->get }}&nbsp;&nbsp;</td>
+                <td>{{ $character->rarity }}&nbsp;&nbsp;</td>
+                <td>{{ $character->build_at }}&nbsp;&nbsp;</td>
+                <td>{{ $character->year }}&nbsp;&nbsp;</td>
+                <td>{{ $character->displacement }}&nbsp;&nbsp;</td>
+                <td><a href="{{ route('characters.show', ['id'=>$character->id]) }}">詳細資料</a></td>
+                <td><a href="{{ route('characters.destroy', ['id'=>$character->id]) }}">刪除資料</a></td>
+                </tr>
         @endforeach
     </table>
     </body>

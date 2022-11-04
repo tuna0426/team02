@@ -22,5 +22,19 @@
     </head>
     <body class="antialiased">
         顯示單一陣營的視圖(view)
+        <table>
+        <tr>
+                <td>編號：</td>
+                <td>{{$camp->id}}</td>            
+            </tr>
+            <tr>
+                <td>名稱：</td>
+                <td>{{$camp->name}}</td>            
+            </tr>
+            <tr>
+                <td>國家：</td>
+                <td>{{$camp->country}}</td>            
+            </tr>
+        </table>
     </body>
 </html>

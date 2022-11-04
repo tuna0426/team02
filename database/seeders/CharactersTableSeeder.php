@@ -60,7 +60,7 @@ class CharactersTableSeeder extends Seeder
 
     public function generateRandomcid()
     {
-        $cid=rand(1,7);
+        $cid=rand(1,8);
         return $cid;
     }
     public function generateRandombuild_at()
@@ -78,7 +78,7 @@ class CharactersTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0;$i<10;$i++){
+        for($i=0;$i<31;$i++){
             DB::table('characters')->insert([
                 'name' =>$this->generateRandomString(),
                 'cid' =>$this->generateRandomcid(),

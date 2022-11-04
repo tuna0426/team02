@@ -18,7 +18,10 @@ class CreateCharactersTable extends Migration
             $table->id()->unsigned()->comment("編號");
             $table->string('name')->comment("艦船名字");
             $table->foreignId('cid')->comment("陣營編號(外部鍵)");
-            $table->foreign('cid')->references('id')->on('camps')->onDelete("cascade");
+            $table->foreign('cid')
+                ->references('id')
+                ->on('camps')
+                ->onDelete("cascade");
             $table->string('rank',191)->comment("艦船級別");
             $table->string('type',191)->comment("艦船類型(7種)");
             $table->string('get',191)->comment("取得方式");

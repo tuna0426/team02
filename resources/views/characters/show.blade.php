@@ -22,5 +22,33 @@
     </head>
     <body class="antialiased">
         顯示單一艦船的視圖(view)
+        <table>
+        
+            <tr>
+                <td>艦船編號：</td>
+                <td>{{$character->id}}</td>            
+            </tr>
+            <tr>
+                <td>艦船名稱：</td>
+                <td>{{$character->name}}</td>            
+            </tr>
+            <tr>
+                <td>陣營編號：</td>
+                <td>{{$character->cid}}</td>            
+            </tr>
+            <tr>
+                <td>取得方式：</td>
+                <td>{{$character->get}}</td>            
+            </tr>
+            <tr>
+                <td>稀有度：</td>
+                <td>{{$character->rank}}</td>            
+            </tr>
+            <tr>
+                <td>建造所需時間：</td>
+                <td>{{$character->build_at}}</td>            
+            </tr>
+
+        </table>
     </body>
 </html>
