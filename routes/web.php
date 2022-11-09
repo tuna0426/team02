@@ -16,7 +16,7 @@ use App\Models\Camp;
 |
 */
 
-Route::get('/', function () {return view('characters.index');});
+Route::get('/', function () {return redirect('characters');});
 
 Route::get('characters', [CharactersController::class, 'index'])->name('characters.index');
 Route::get('characters/{id}', [CharactersController::class, 'show'])->where('id','[0-9]+')->name('characters.show');
