@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Camp;
 use App\Models\Character;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class CampsController extends Controller
 {
     public function index()
@@ -24,5 +24,9 @@ class CampsController extends Controller
         $team = Camp::findOrFail($id);
         $team->delete();
         return redirect('camps');
+    }
+    public function create()
+    {
+        return view('camps.create');
     }
 }
