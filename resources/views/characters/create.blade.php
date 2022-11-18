@@ -1,8 +1,8 @@
 @extends('app')
 
-@section('title','建立艦船表單')
+@section('title')
 
-@section('azur_theme','建立艦船表單')
+@section('azur_theme')
 
 @section('azur_contents')
     新增艦船

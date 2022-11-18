@@ -6,11 +6,15 @@
 
 @section('azur_contents')
         <h1>顯示所有艦船的視圖(view)</h1>
+    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+        <a href="{{ route('characters.create') }} ">新增艦船</a>
+    </div>
     <table>
         <tr>
             <th>編號</th>
             <th>艦船名字</th>
-            <th>陣營編號</th><!--key--> 
+            <th>陣營</th><!--key--> 
+            <th>陣營所屬國家</th>
             <th>艦船級別</th>
             <th>艦船類型</th>
             <th>取得方式</th>
@@ -25,7 +29,8 @@
             <tr>
                 <td>{{ $character->id }}&nbsp;&nbsp;</td>
                 <td>{{ $character->name }}&nbsp;&nbsp;</td>
-                <td>{{ $character->cid }}&nbsp;&nbsp;</td>
+                <td>{{ $character->camp->name }}&nbsp;&nbsp;</td>
+                <td>{{ $character->camp->country}}&nbsp;&nbsp;</td>
                 <td>{{ $character->rank }}&nbsp;&nbsp;</td>
                 <td>{{ $character->type }}&nbsp;&nbsp;</td>
                 <td>{{ $character->get }}&nbsp;&nbsp;</td>
