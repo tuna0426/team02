@@ -39,7 +39,13 @@
                 <td>{{ $character->year }}&nbsp;&nbsp;</td>
                 <td>{{ $character->displacement }}&nbsp;&nbsp;</td>
                 <td><a href="{{ route('characters.show', ['id'=>$character->id]) }}">詳細資料</a></td>
-                <td><a href="{{ route('characters.destroy', ['id'=>$character->id]) }}">刪除資料</a></td>
+                <td>
+                    <form action="{{ url('/characters/delete', ['id' => $character->id]) }}" method="post">
+                        <input class="btn btn-default" type="submit" value="刪除" />
+                        @method('delete')
+                        @csrf
+                    </form>
+                </td>
                 </tr>
         @endforeach
     </table>

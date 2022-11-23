@@ -25,7 +25,13 @@
                 <td>{{ $camp->r_or_b }}&nbsp;&nbsp;</td>
                 <td>{{ $camp->country }}&nbsp;&nbsp;</td>
                 <td><a href="{{ route('camps.show', ['id'=>$camp->id]) }}">詳細資料</a></td>
-                <td><a href="{{ route('camps.destroy', ['id'=>$camp->id]) }}">刪除資料</a></td>
+                <td>
+                    <form action="{{ url('/camps/delete', ['id' => $camp->id]) }}" method="post">
+                        <input class="btn btn-default" type="submit" value="刪除" />
+                        @method('delete')
+                        @csrf
+                    </form>
+                </td>
             </tr>
         @endforeach
         
