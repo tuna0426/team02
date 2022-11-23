@@ -50,7 +50,7 @@
             color: inherit;
             text-decoration: inherit
         }
-
+        
         svg, video 
         {
             display: block;
@@ -440,3 +440,4 @@
 </div>
 </body>
 </html>
+

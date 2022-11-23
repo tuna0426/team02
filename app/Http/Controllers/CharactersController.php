@@ -22,6 +22,7 @@ class CharactersController extends Controller
     }
     public function destroy($id)
     {
+        //return $id;
         $character = Character::findOrFail($id);
         $character->delete();
         return redirect('characters');

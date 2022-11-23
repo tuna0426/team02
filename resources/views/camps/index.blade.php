@@ -28,6 +28,7 @@
                 <td><a href="{{ route('camps.destroy', ['id'=>$camp->id]) }}">刪除資料</a></td>
             </tr>
         @endforeach
+        
     </table>
 @endsection
 
