@@ -12,4 +12,18 @@ class Character extends Model
     {
         return $this->belongsTo("App\Models\Camp",'cid','id');
     }
+    protected $fillable=[
+        'name',
+        'cid',
+        'camp',
+        'rank',
+        'type',
+        'get',
+        'rarity',
+        'build_at',
+        'year',
+        'displacement',
+        'created_at',
+        'updated_at'
+    ];
 }

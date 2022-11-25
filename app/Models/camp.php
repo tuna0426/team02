@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Camp extends Model
 {
+    protected $fillable=[
+        'name',
+        'r_or_b',
+        'country',
+        'created_at',
+        'updated_at'
+    ];
+
     use HasFactory;
     public function characters()
     {
@@ -17,4 +25,5 @@ class Camp extends Model
         $this->characters()->delete();
         return parent::delete();
     }
+
 }

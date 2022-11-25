@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Camp;
 use App\Models\Character;
-use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Request as Psr7Request;
+use Illuminate\Http\Client\Request as ClientRequest;
+use Request;
 use Illuminate\Support\Facades\DB;
 class CharactersController extends Controller
 {
+    public function store()
+    {
+        $input=Request::all();
+        Character::create($input);
+        return redirect('characters');
+    }
     public function index()
     {
         $characters = Character::all();
