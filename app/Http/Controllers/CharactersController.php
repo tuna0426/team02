@@ -37,16 +37,36 @@ class CharactersController extends Controller
     }
     public function create()
     {
-        $camps = DB::table('camps')
-            ->select('camps.id', 'camps.name')
-            ->orderBy('camps.id', 'asc')
-            ->get();
 
-        $data = [];
-        foreach ($camps as $camp)
-        {
-            $data[$camp->id] = $camp->name;
-        }
-        return view('characters.create',["camps" =>$data]);
+        $tags= Camp::orderBy('camps.id','asc')->pluck('camps.name','camps.id');
+        return view('characters.create',["camps" =>$tags]);
+    }
+    public function edit($id)
+    {
+        $character = Character::findOrFail($id);
+        $tags= Camp::orderBy('camps.id','asc')->pluck('camps.name','camps.id');
+        $selectType=$character->type;
+        $selectTags=$character->cid;
+        $selectGet=$character->get;
+        $selectRarity=$character->rarity;
+        return view('characters.edit',
+        ["camps" =>$tags,'character'=>$character,'selectedCid'=>$selectTags,'selectedType'=>$selectType,'selectedGet'=>$selectGet,'selectedRarity'=>$selectRarity]);
+    }
+    public function update($id)
+    {
+        $input=Request::all();
+        $character = Character::findOrFail($id);
+
+        $character->name=$input->name;
+        $character->cid=$input->cid;
+        $character->rank =$input->rank;
+        $character->type=$input->type;
+        $character->get=$input->get;
+        $character->rarity=$input->rarity;
+        $character->build_at=$input->build_at;
+        $character->year=$input->year;
+        $character->displacement=$input->displacement;
+        $character->save();
+        return redirect('characters');
     }
 }

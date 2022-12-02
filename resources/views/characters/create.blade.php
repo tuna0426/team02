@@ -21,15 +21,15 @@
     </div>
     <div class="form-group">
         {!!Form::label('type','艦船類型:')!!}
-        {!!Form::text('type',null)!!}
+        {!!Form::select('type',array('驅逐'=>'驅逐','戰列'=>'戰列','空母'=>'空母','輕空母'=>'輕空母','輕巡'=>'輕巡','重巡'=>'重巡','潛艦'=>'潛艦','戰巡'=>'戰巡','潛母'=>'潛母'))!!}
     </div>
     <div class="form-group">
         {!!Form::label('get','取得方式:')!!}
-        {!!Form::text('get',null)!!}
+        {!!Form::select('get',array('活動建造'=>'活動建造','常駐建造'=>'常駐建造'))!!}
     </div>
     <div class="form-group">
         {!!Form::label('rarity','稀有度:')!!}
-        {!!Form::text('rarity',null)!!}
+        {!!Form::select('rarity',array('普通'=>'N','稀有'=>'R','超稀有'=>'SR','超激稀有'=>'SSR','傳奇稀有'=>'UR',))!!}
     </div>
     <div class="form-group">
         {!!Form::label('build_at','建造所需時間:')!!}

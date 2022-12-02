@@ -17,6 +17,7 @@
             <th>國家</th>
             <th>操作1</th>
             <th>操作2</th>
+            <th>操作3</th>
         </tr>
         @foreach($camps as $camp)
             <tr>
@@ -25,6 +26,7 @@
                 <td>{{ $camp->r_or_b }}&nbsp;&nbsp;</td>
                 <td>{{ $camp->country }}&nbsp;&nbsp;</td>
                 <td><a href="{{ route('camps.show', ['id'=>$camp->id]) }}">詳細資料</a></td>
+                <td><a href="{{ route('camps.edit', ['id'=>$camp->id]) }}">修改資料</a></td>
                 <td>
                     <form action="{{ url('/camps/delete', ['id' => $camp->id]) }}" method="post">
                         <input class="btn btn-default" type="submit" value="刪除" />

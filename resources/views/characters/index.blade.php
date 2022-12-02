@@ -24,6 +24,7 @@
             <th>排水量</th>
             <th>操作1</th>
             <th>操作2</th>
+            <th>操作3</th>
         </tr>
         @foreach($characters as $character)
             <tr>
@@ -39,6 +40,7 @@
                 <td>{{ $character->year }}&nbsp;&nbsp;</td>
                 <td>{{ $character->displacement }}&nbsp;&nbsp;</td>
                 <td><a href="{{ route('characters.show', ['id'=>$character->id]) }}">詳細資料</a></td>
+                <td><a href="{{ route('characters.edit', ['id'=>$character->id]) }}">修改資料</a></td>
                 <td>
                     <form action="{{ url('/characters/delete', ['id' => $character->id]) }}" method="post">
                         <input class="btn btn-default" type="submit" value="刪除" />

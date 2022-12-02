@@ -34,4 +34,22 @@ class CampsController extends Controller
         Camp::create($input);
         return redirect('camps');
     }
+    public function edit($id)
+    {
+        $camp = Camp::findOrFail($id);
+        $selectR_or_B=$camp->r_or_b;
+        $selectCountry=$camp->country;
+        return view('camps.edit',['camp'=>$camp,'selectedR_or_B'=>$selectR_or_B,'selectCountry'=>$selectCountry]);
+    }
+    public function update($id)
+    {
+        $input=Request::all();
+        $camp = Camp::findOrFail($id);
+
+        $camp->name=$input->name;
+        $camp->r_or_b=$input->r_or_b;
+        $camp->country =$input->country;
+        $camp->save();
+        return redirect('characters');
+    }
 }
