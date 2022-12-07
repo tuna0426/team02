@@ -18,7 +18,7 @@ class CharactersController extends Controller
     }
     public function index()
     {
-        $characters = Character::all();
+        $characters = Character::paginate(25);
         return view ('characters.index', ['characters'=>$characters]);
     }
     public function show($id)
@@ -37,35 +37,31 @@ class CharactersController extends Controller
     }
     public function create()
     {
-
         $tags= Camp::orderBy('camps.id','asc')->pluck('camps.name','camps.id');
-        return view('characters.create',["camps" =>$tags]);
+        return view('characters.create',["camps" =>$tags,'character'=>null,'selectedCid'=>null]);
     }
     public function edit($id)
     {
         $character = Character::findOrFail($id);
         $tags= Camp::orderBy('camps.id','asc')->pluck('camps.name','camps.id');
-        $selectType=$character->type;
         $selectTags=$character->cid;
-        $selectGet=$character->get;
-        $selectRarity=$character->rarity;
         return view('characters.edit',
-        ["camps" =>$tags,'character'=>$character,'selectedCid'=>$selectTags,'selectedType'=>$selectType,'selectedGet'=>$selectGet,'selectedRarity'=>$selectRarity]);
+        ["camps" =>$tags,'character'=>$character,'selectedCid'=>$selectTags]);
     }
     public function update($id)
     {
         $input=Request::all();
         $character = Character::findOrFail($id);
 
-        $character->name=$input->name;
-        $character->cid=$input->cid;
-        $character->rank =$input->rank;
-        $character->type=$input->type;
-        $character->get=$input->get;
-        $character->rarity=$input->rarity;
-        $character->build_at=$input->build_at;
-        $character->year=$input->year;
-        $character->displacement=$input->displacement;
+        $character->name = $input["name"];
+        $character->cid=$input["cid"];
+        $character->rank =$input["rank"];
+        $character->type=$input["type"];
+        $character->get=$input["get"];
+        $character->rarity=$input["rarity"];
+        $character->build_at=$input["build_at"];
+        $character->year=$input["year"];
+        $character->displacement=$input["displacement"];
         $character->save();
         return redirect('characters');
     }
