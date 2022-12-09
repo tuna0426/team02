@@ -5,6 +5,7 @@ use App\Models\Camp;
 use App\Models\Character;
 use Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CreateCampRequest;
 class CampsController extends Controller
 {
     public function index()
@@ -28,10 +29,18 @@ class CampsController extends Controller
     {
         return view('camps.create');
     }
-    public function store()
+    public function store(CreateCampRequest $request)
     {
-        $input=Request::all();
-        Camp::create($input);
+        
+        
+        $name = $request->input('name');
+        $r_or_b=$request->input('r_or_b');
+        $country=$request->input('country');
+        $camp=Camp::create([
+            'name'=>$name,
+            'r_or_b'=>$r_or_b,
+            'country'=>$country,
+        ]);
         return redirect('camps');
     }
     public function edit($id)
@@ -39,15 +48,15 @@ class CampsController extends Controller
         $camp = Camp::findOrFail($id);
         return view('camps.edit',['camp'=>$camp]);
     }
-    public function update($id)
+    public function update($id,CreateCampRequest $request)
     {
-        $input=Request::all();
+        
         $camp = Camp::findOrFail($id);
 
-        $camp->name=$input["name"];
-        $camp->r_or_b=$input["r_or_b"];
-        $camp->country =$input["country"];
+        $camp->name=$request->input("name");
+        $camp->r_or_b=$request->input("r_or_b");
+        $camp->country =$request->input("country");
         $camp->save();
-        return redirect('characters');
+        return redirect('camps');
     }
 }

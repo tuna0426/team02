@@ -8,12 +8,33 @@ use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CreateCharacterRequest;
 class CharactersController extends Controller
 {
-    public function store()
+    public function store(CreateCharacterRequest $request)
     {
-        $input=Request::all();
-        Character::create($input);
+        $name = $request->input("name");
+        $cid=$request->input("cid");
+        $rank =$request->input("rank");
+        $type=$request->input("type");
+        $get=$request->input("get");
+        $rarity=$request->input("rarity");
+        $build_at=$request->input("build_at");
+        $year=$request->input("year");
+        $displacement=$request->input("displacement");
+        
+        $character=Character::create([
+            'name'=>$name,
+            'cid'=>$cid,
+            "rank"=>$rank,
+            "type"=>$type,
+            "get"=>$get,
+            "rarity"=>$rarity,
+            "build_at"=>$build_at,
+            "year"=>$year,
+            "displacement"=>$displacement
+
+        ]);
         return redirect('characters');
     }
     public function index()
@@ -48,20 +69,19 @@ class CharactersController extends Controller
         return view('characters.edit',
         ["camps" =>$tags,'character'=>$character,'selectedCid'=>$selectTags]);
     }
-    public function update($id)
+    public function update($id,CreateCharacterRequest $request)
     {
-        $input=Request::all();
         $character = Character::findOrFail($id);
 
-        $character->name = $input["name"];
-        $character->cid=$input["cid"];
-        $character->rank =$input["rank"];
-        $character->type=$input["type"];
-        $character->get=$input["get"];
-        $character->rarity=$input["rarity"];
-        $character->build_at=$input["build_at"];
-        $character->year=$input["year"];
-        $character->displacement=$input["displacement"];
+        $character->name = $request->input("name");
+        $character->cid=$request->input("cid");
+        $character->rank =$request->input("rank");
+        $character->type=$request->input("type");
+        $character->get=$request->input("get");
+        $character->rarity=$request->input("rarity");
+        $character->build_at=$request->input("build_at");
+        $character->year=$request->input("year");
+        $character->displacement=$request->input("displacement");
         $character->save();
         return redirect('characters');
     }

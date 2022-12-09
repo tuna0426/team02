@@ -11,5 +11,5 @@
         {!!Form::select('country',array('美國'=>'美國','日本'=>'日本','德國'=>'德國','英國'=>'英國','中華民國'=>'中華民國','蘇聯'=>'蘇聯','義大利'=>'義大利','法國'=>'法國'))!!}
     </div>
     <div class="form-group">
-        {!!Form::submit('新增陣營')!!}
+        {!! Form::submit($submitButtonText, ['class'=>'btn btn-primary form-control']) !!}
     </div>

@@ -6,6 +6,7 @@
 
 @section('azur_contents')
     修改特定陣營
+    @include('message.list')
     {!! Form::model($camp, ['method'=>'PATCH', 'action'=>['\App\Http\Controllers\CampsController@update', $camp->id]]) !!}
     @include('camps.form', ['submitButtonText'=>"更新陣營資料"])
     {!! Form::close() !!}
