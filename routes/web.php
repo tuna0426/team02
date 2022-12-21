@@ -20,6 +20,7 @@ use App\Models\Character;
 Route::get('/', function () {return redirect('characters');});
 
 Route::get('characters', [CharactersController::class, 'index'])->name('characters.index');
+Route::post('characters/type', [CharactersController::class, 'type'])->name('characters.type');
 Route::get('characters/create',[CharactersController::class, 'create'])->name('characters.create');
 Route::get('characters/{id}', [CharactersController::class, 'show'])->where('id','[0-9]+')->name('characters.show');
 Route::post('characters/store',[CharactersController::class,'store'])->name('Characters.store');

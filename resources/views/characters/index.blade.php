@@ -8,6 +8,12 @@
         <h1>顯示所有艦船的視圖(view)</h1>
     <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
         <a href="{{ route('characters.create') }} ">新增艦船</a>
+        <form action="{{ url('characters/type') }}" method='post'>
+            {!! Form::label('typ', '選取類型：') !!}
+            {!! Form::select('typ', $types, ['class' => 'form-control']) !!}
+            <input class="btn btn-default" type="submit" value="查詢" />
+            @csrf
+        </form>
     </div>
     <table>
         <tr>
@@ -51,5 +57,5 @@
                 </tr>
         @endforeach
     </table>
-    {{ $characters->links()}}
+    
 @endsection

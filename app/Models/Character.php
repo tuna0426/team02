@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,4 +27,12 @@ class Character extends Model
         'created_at',
         'updated_at'
     ];
+    public function ScopeallTypes($query)
+    {
+        $query->select('type')->groupBy('type');
+    }
+    public function ScopeType($query,$typ)
+    {
+        $query->where('type','=',$typ)->orderBy('year');
+    }
 }

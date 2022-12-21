@@ -6,9 +6,11 @@ use App\Models\Camp;
 use App\Models\Character;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Client\Request as ClientRequest;
-use Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateCharacterRequest;
+
+
 class CharactersController extends Controller
 {
     public function store(CreateCharacterRequest $request)
@@ -40,7 +42,13 @@ class CharactersController extends Controller
     public function index()
     {
         $characters = Character::paginate(25);
-        return view ('characters.index', ['characters'=>$characters]);
+        $types=Character::allTypes()->get();
+        $data=[];
+        foreach($types as $type)
+        {
+            $data["$type->type"]=$type->type;
+        }
+        return view ('characters.index', ['characters'=>$characters,'types'=>$data,'showpagination'=>true]);
     }
     public function show($id)
     {
@@ -84,5 +92,17 @@ class CharactersController extends Controller
         $character->displacement=$request->input("displacement");
         $character->save();
         return redirect('characters');
+    }
+    public function type(Request $request)
+    {
+        $characters = Character::type($request->input('typ'))->get();
+
+        $types= Character::alltypes()->get();
+        $data=[];
+        foreach ($types as $type)
+        {
+            $data["$type->type"]=$type->type;
+        }
+        return view('characters.index',['characters'=>$characters,'types'=>$data,'showpagination'=>false]);
     }
 }
