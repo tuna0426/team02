@@ -57,5 +57,7 @@
                 </tr>
         @endforeach
     </table>
-    
+    @if($showpagination)
+    {{$characters->links()}}
+    @endif
 @endsection

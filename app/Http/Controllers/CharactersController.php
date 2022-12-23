@@ -39,17 +39,7 @@ class CharactersController extends Controller
         ]);
         return redirect('characters');
     }
-    public function index()
-    {
-        $characters = Character::paginate(25);
-        $types=Character::allTypes()->get();
-        $data=[];
-        foreach($types as $type)
-        {
-            $data["$type->type"]=$type->type;
-        }
-        return view ('characters.index', ['characters'=>$characters,'types'=>$data,'showpagination'=>true]);
-    }
+    
     public function show($id)
     {
         $character = Character::findOrFail($id);
@@ -95,14 +85,17 @@ class CharactersController extends Controller
     }
     public function type(Request $request)
     {
+        
         $characters = Character::type($request->input('typ'))->get();
-
-        $types= Character::alltypes()->get();
-        $data=[];
-        foreach ($types as $type)
-        {
-            $data["$type->type"]=$type->type;
-        }
-        return view('characters.index',['characters'=>$characters,'types'=>$data,'showpagination'=>false]);
+        
+        $types= Character::alltypes()->pluck('characters.type','characters.type');
+        $selectTypes=$types;
+        return view('characters.index',['characters'=>$characters,'types'=>$types,'selectTypes'=>$selectTypes,'showpagination'=>false]);
+    }
+    public function index()
+    {
+        $characters = Character::paginate(25);
+        $types=Character::allTypes()->pluck('characters.type','characters.type');
+        return view ('characters.index', ['characters'=>$characters,'types'=>$types,'selectedTypes'=>null,'showpagination'=>true]);
     }
 }
