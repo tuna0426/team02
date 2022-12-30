@@ -62,11 +62,19 @@
             height: auto
         }
 
+    
         .bg-white {
             --bg-opacity: 1;
             background-color: #fff;
             background-color: rgba(255, 255, 255, var(--bg-opacity))
         }
+
+        /*::before.bg-white {
+            --bg-opacity: 1;
+            background-color: #fff;
+            background-color: rgba(124, 128, 242, var(--bg-opacity))
+        }
+        */
 
         .bg-gray-100 {
             --bg-opacity: 1;
