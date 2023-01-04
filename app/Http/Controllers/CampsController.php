@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Camp;
 use App\Models\Character;
-use Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateCampRequest;
+use Illuminate\Http\Request;
 class CampsController extends Controller
 {
     public function index()
@@ -58,5 +58,47 @@ class CampsController extends Controller
         $camp->country =$request->input("country");
         $camp->save();
         return redirect('camps');
+    }
+    public function api_camps()
+    {
+        return Camp::all();
+    }
+
+    public function api_update(Request $request)
+    {
+        $camp = Camp::find($request ->input("id"));
+        if ($camp == null)
+        {
+            return response() -> json(['status' => 0,]);
+        }
+        $camp -> name = $request->input('name');
+        $camp -> r_or_b = $request->input('r_or_b');
+        $camp -> country = $request->input('country');
+
+        if ($camp ->save())
+        {
+            return response()-> json(['status' => 1,]);
+        }
+        else
+        {
+            return response() -> json(['status' => 0,]);
+        }
+    }
+    public function api_delete(Request $request)
+    {
+        $camp = Camp::find($request->input('id'));
+
+        if ($camp == null)
+        {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+        if ($camp->delete())
+        {
+            return response()->json([
+                'status' => 1,
+            ]);
+        }
     }
 }

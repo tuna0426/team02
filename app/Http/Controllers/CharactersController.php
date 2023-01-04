@@ -98,4 +98,52 @@ class CharactersController extends Controller
         $types=Character::allTypes()->pluck('characters.type','characters.type');
         return view ('characters.index', ['characters'=>$characters,'types'=>$types,'selectedTypes'=>null,'showpagination'=>true]);
     }
+
+    public function api_characters()
+    {
+        return Character::all();
+    }
+
+    public function api_update(Request $request)
+    {
+        $character = Character::find($request ->input("id"));
+        if ($character == null)
+        {
+            return response() -> json(['status' => 0,]);
+        }
+        $character -> name = $request->input('name');
+        $character -> rank = $request->input('rank');
+        $character -> type = $request->input('type');
+        $character -> get = $request->input('get');
+        $character -> rarity = $request->input('rarity');
+        $character -> build_at = $request->input('build_at');
+        $character -> year = $request->input('year');
+        $character -> displacement = $request->input('displacement');
+
+        if ($character ->save())
+        {
+            return response()-> json(['status' => 1,]);
+        }
+        else
+        {
+            return response() -> json(['status' => 0,]);
+        }
+    }
+    public function api_delete(Request $request)
+    {
+        $character = Character::find($request->input('id'));
+
+        if ($character == null)
+        {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+        if ($character->delete())
+        {
+            return response()->json([
+                'status' => 1,
+            ]);
+        }
+    }
 }
